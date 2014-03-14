@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= @post.name %></strong>
+</p>
+
+<p>
+  <%= @post.content %>
+</p>
+
+<hr>
+
+<p>
+  <%= form_for @comment, url: post_comments_path(@post) do |f| %>
+    <%= f.text_area :content %><br>
+    <%= f.submit "Post Comment" %>
+  <% end %>
+</p>
+
+<p>
+  <strong><%= pluralize(@comments.count, 'comment') %></strong><br><br>
+  <% @comments.each do |comment| %>
+    <%= comment.content %><br>
+    Last updated at <%= comment.updated_at %><br><br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
