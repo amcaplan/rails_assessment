@@ -1,0 +1,40 @@
+How does rails communicate with the database?  Please be thorough in discussing all the config files and pieces of rails necessary to communicate with the database.
+
+What is a resource?
+A resource is a model you want the user to be able to access via standard CRUD operations.  By writing "resource :resource_name" (or some variant) in routes.rb, you establish the standard RESTful routes for the resource.
+
+What are the standard RESTful routes for a resource?
+Rails provides 7 standard routes:
+4 "GET" routes
+  /resources                view all instances of the resource
+  /resources/:id/show       display an instance of the resource
+  /resources/:id/new        create a new resource instance
+  /resources/:id/edit       edit a pre-existing instance of the resource
+
+1 "PATCH" route (also accessible via "PUT", but "PATCH" is usually used to send minor modifications, while "PUT" is supposed to send a full copy of the item's properties)
+  /resources                update an instance of the resource
+
+1 "POST" route
+  /resources/:id/update     create a new instance of the resource
+
+1 "DELETE" route
+  /resources/:id/destroy    delete an instance of the resource
+
+What is CRUD?
+Create, Read, Update, Delete - the 4 standard actions for interaction with a table in a database
+
+What is REST?
+Representational State Transfer - for our purposes, a standard way for a client to send requests to a server.
+
+What is the difference between CRUD and REST?
+Client-server interactions follow RESTful patterns, while the server's controller accesses the server's database to perform CRUD operations.
+
+Describe the flow of a request from a users browser through the rails stack and back.
+Client request -> Routed to controller -> controller accesses database to get required data (possibly modifying database data along the way) -> database sends data to controller -> controller accesses views -> views generate HTML based on supplied information, which is sent to controller -> controller sends HTML to the client
+
+What are HTTP verbs?
+Text that is included in the HTTP request to describe the nature of the request.  Commonly used verbs include "GET" (to view a resource), "POST" (to add a resource), "PATCH" and "PUT" (to modify a resource), and "DELETE" (to delete a resource).
+The meaning of HTTP verbs is entirely semantic; it is up to the developer to design the site properly to conform to RESTful standards.
+
+Why do we use migrations?
+Migrations allow us to avoid writing error-prone SQL statements and easily migrate up and down (to reverse changes if necessary).
